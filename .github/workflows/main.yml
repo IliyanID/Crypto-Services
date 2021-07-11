@@ -30,4 +30,7 @@ jobs:
         run: |
           npm install react-scripts --save
           cd front-end
-          npm start
+          npm ci
+          npm run build --if-present
+          npm start & npx wait-on http://localhost:3000
+
