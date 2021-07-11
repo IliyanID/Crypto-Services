@@ -28,5 +28,7 @@ jobs:
       # Runs a set of commands using the runners shell
       - shell: cmd
         run: |
+          npm install react-scripts --save
           cd front-end
-          npm start
+          start cmd /k "npm start"
+
