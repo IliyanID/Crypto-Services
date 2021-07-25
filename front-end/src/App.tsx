@@ -3,7 +3,7 @@ import Terminal from './Terminal/Terminal'
 import './App.css';
 
 const App = () => {
-  const [username,setUsername] = useState("user");
+  const [credentials,setCredentials] = useState({username:"guest",password:"",loggedIn:false});
   
 
 
@@ -17,8 +17,8 @@ const App = () => {
         <Terminal 
           width={500}
           height={500}
-          setUsername={setUsername}
-          username={username}>
+          credentials={credentials}
+          setCredentials={setCredentials}>
         </Terminal>
 
       </div>

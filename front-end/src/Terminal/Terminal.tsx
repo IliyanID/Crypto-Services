@@ -1,102 +1,60 @@
-import React, { useState,FormEvent }  from 'react'
+import React, { useState}  from 'react'
+import {DefaultState} from './DefaultState/defaultState'
+import {LoginState} from './LoginState/LoginState'
+import {LogoutState} from './LogoutState/LogoutState'
 import './Terminal.css'
+
 interface Props{
     width: number;
     height: number;
-    username:string;
-    setUsername:React.Dispatch<React.SetStateAction<string>>;
+    credentials: {
+        username: string;
+        password: string;
+        loggedIn: boolean;
+    };
+    setCredentials:React.Dispatch<React.SetStateAction<{
+        username: string;
+        password: string;
+        loggedIn: boolean;
+    }>>;
 }
-
-let loginTrigger = false;
 
 const Terminal: React.FC<Props> = (props) =>{
     const [lines,setLines] = useState([""]);
-    const addLine = (newLine:string) =>{
-        updateTerminalInput(defaultString);
-        let tempLines = [...lines];
-        tempLines.push(newLine);
-        setLines(tempLines);
+    const [defaultString,setDefaultString] = useState(props.credentials.username + '@Terminal:~$ ')
+    const [terminalInput,setTerminalInput] = useState(defaultString);
+    const [terminalStateIndex,setTerminalStateIndex] = useState(0);
+    
+    let stateProps = {
+        defaultString:defaultString,
+        setDefaultString:setDefaultString,
+    
+        lines:lines,
+        setLines:setLines,
+    
+        terminalInput:terminalInput,
+        setTerminalInput:setTerminalInput,
 
+        setTerminalStateIndex:setTerminalStateIndex,
 
+        credentials:props.credentials,
+        setCredentials:props.setCredentials
     }
-    const addLineArr = (newLines:string[]) =>{
-        const tempLines = [...lines];
-        for(let i = 0; i < newLines.length; i++)
-            tempLines.push(newLines[i]);
-        setLines(tempLines);
-    }
-
-    const formSubmit = (e:FormEvent) =>{
-        let newLine = terminalInput;
-        e.preventDefault();
-        updateTerminalInput(defaultString);
-        addLine(newLine);
-        
-        newLine = newLine.substr(defaultString.length);
-        let arrayLines = newLine.split(" ");
-        console.log(newLine);
-        console.log(arrayLines);
-        if(loginTrigger){
-            props.setUsername(terminalInput)
-            setDefaultString(terminalInput + '@Terminal:~$ ');
-            validTerminalInput("")
-            validTerminalInput("")
-            loginTrigger = false;
-            console.log("Login Trigger username: " + terminalInput)
+    const terminalState = [
+        {
+           state:"default",
+           formJSX: DefaultState(stateProps)
+        },
+        {
+            state:"login",
+            formJSX: LoginState(stateProps)
+        },
+        {
+            state:"logout",
+            formJSX:LogoutState(stateProps)
         }
-        else
-            commands(arrayLines);
-        
+    ]
 
-    }
-
-    const [defaultString,setDefaultString] = useState(props.username + '@Terminal:~$ ')
-
-    const commands = (command:string[]) =>{
-        switch(command[0]){
-            case "user":
-                switch(command[1]){
-                    case "login":
-                        login();
-                    break;
-
-                    case "logout":
-                    console.log("")
-                    break;
-
-                    case "register":
-                    console.log("")
-                    break;
-                }
-            break;
-
-
-        }
-    }
-
-    const login = () =>{
-        setDefaultString("");
-        updateTerminalInput("")
-        console.log("Entered login")
-        addLineArr(["Welcome to User Login Portal", 
-                    "----------------------------------------",
-                    "Enter Username"])
-
-        
-        loginTrigger = true;
-
-
-    }
-
-    const[terminalInput,updateTerminalInput] = useState(defaultString)
-    const validTerminalInput = (input:string) =>{
-        if(input.substr(0,defaultString.length) !== defaultString.substr(0,defaultString.length)){
-            updateTerminalInput(defaultString)
-            return;
-        }
-        else
-            updateTerminalInput(input);       
-    }
     return(
         <div 
             style={{width:props.width+"px", 
@@ -104,20 +62,11 @@ const Terminal: React.FC<Props> = (props) =>{
             className='Terminal'>
             <div className='terminal_wrapper'>
                 {lines.map((line:string,key)=>{
-                    return (<p key={key}>{line}</p>)
+                        return (<p key={key}>{line}</p>)
                     })}
-                <form onSubmit={formSubmit} autoComplete='off' id='formId'>
-                    <input 
-                        id="terminalNewLine"
-                        onChange={(e)=>validTerminalInput(e.target.value)} 
-                        value={terminalInput} 
-                        className='terminal_input' 
-                        spellCheck='false' 
-                        autoComplete='off'
-                    />
-                </form>
+                {terminalState[terminalStateIndex].formJSX}
             </div>
         </div>
     )
 }
-export default Terminal
+export default Terminal;
