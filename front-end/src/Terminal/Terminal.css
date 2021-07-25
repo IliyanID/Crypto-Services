@@ -1,0 +1,58 @@
+:root{
+    --terminalGreen:#33FF33;
+}
+.Terminal::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    cursor:grab;
+ 
+}
+.Terminal{
+    position:relative;
+    border:2px var(--terminalGreen) solid;
+    border-radius:10px;
+    background-color:black;
+}
+
+.Terminal p{
+    margin:0;
+    padding:0;
+    color:var(--terminalGreen);
+    font-size:16px;
+    user-select: none;
+    font-family:sans-serif;
+    font-weight: bolder;
+    
+}
+
+.terminal_wrapper{
+    position:absolute;
+    bottom:0px;
+    height:auto;
+    width:100%;
+    padding:10px;
+}
+
+.terminal_input{
+    width:100%;
+    float:right;
+    position:relative;
+    border:none;
+    padding:0px;
+    margin:0px;
+    outline:none;
+    color:black;
+    padding:0px; 
+    margin:0px;
+    color:var(--terminalGreen);
+    border-radius:0px;
+    background-color:transparent;
+    font-size:16px;
+    font-weight: bolder;
+    font-family:sans-serif;
+
+}
