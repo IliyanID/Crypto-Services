@@ -11,7 +11,7 @@ on:
 jobs:
   build:
     name: Build
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     
     steps:
     - name: Checkout code
@@ -28,32 +28,36 @@ jobs:
         npm ci
     
     - name: Build project
-      run: npm run build
+      run: |
+        cd front-end
+        npm run build
     
     - name: Run tests
-      run: npm run test
+      run: |
+        cd front-end
+        npm run test
 
     - name: Upload production-ready build files
       uses: actions/upload-artifact@v2
       with:
         name: production-files
-        path: ./build
+        path: .front-end/build
   
   deploy:
     name: Deploy
     needs: build
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
+    runs-on: self-hosted
+    
     
     steps:
     - name: Download artifact
       uses: actions/download-artifact@v2
       with:
         name: production-files
-        path: ./build
+        path: .front-end/build
 
     - name: Deploy to gh-pages
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./build
+        publish_dir: .front-end/build
