@@ -32,12 +32,15 @@ jobs:
         cd front-end
         npm run build
         cp -a ./build/. ../back-end/public/
-        cd ../back-end
-    - name: Kill old
+  deploy:
+    name: Deploy
+    runs-on: self-hosted
+    steps:
+    - name: Kill Old Server
       continue-on-error: true
       run: |
         sudo lsof -t -i tcp:80 -s tcp:listen | sudo xargs kill
-    - name: deploy
+    - name: Deploy New Server
       run: |
         cd ./back-end
         npm install express --save
