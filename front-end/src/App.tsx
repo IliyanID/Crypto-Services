@@ -13,7 +13,7 @@ const App = () => {
 
       </header>
       <div>
-        <p>TeST</p>
+        <p>Production</p>
         <Terminal 
           width={500}
           height={500}
