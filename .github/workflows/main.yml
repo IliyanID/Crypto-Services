@@ -33,6 +33,7 @@ jobs:
         npm run build
         cp -a ./build/. ../back-end/public/
         cd ../back-end
+        npm install express --save
         nohup node server.js &
 
 
