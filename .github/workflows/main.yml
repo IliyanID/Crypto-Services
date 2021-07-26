@@ -33,8 +33,7 @@ jobs:
         npm run build
 
     - name: Copy Build
-    - run: |
-       cp -a ./front-end/build/. ./back-end/public/
+    - run: cp -a ./front-end/build/. ./back-end/public/
        
     - name: Deploy
     - run: |
