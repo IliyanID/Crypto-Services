@@ -34,9 +34,18 @@ jobs:
         cp -a ./build/. ../back-end/public/
         cd ../back-end
         npm install express --save
+    - name: Kill old
+      continue-on-error: true
+      run: |
         sudo lsof -t -i tcp:80 -s tcp:listen | sudo xargs kill
-        sudo node server.js &
-        disown
+    - name: deploy
+      run: |
+        sudo node server.js & && disown
+      
+        
+        
+
+    
 
 
   
