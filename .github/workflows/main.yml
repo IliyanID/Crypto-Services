@@ -41,7 +41,8 @@ jobs:
       run: |
         cd ./back-end
         npm install express --save
-        sudo node server.js & && disown
+        sudo node server.js & 
+        disown
       
         
         
