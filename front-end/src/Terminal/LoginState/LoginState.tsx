@@ -23,7 +23,7 @@ export const LoginState = (props:stateInterface):JSX.Element =>{
 }
 const addLines = (lines:string[]) => {
     let tempLines = [...globalProps.lines]
-    lines.map((line)=>{return tempLines.push(line)});
+    lines.map((line)=>{return tempLines.push({content:line,userInput:true})});
     globalProps.setLines(tempLines);
 }
 
@@ -59,18 +59,18 @@ export const loginTrigger = () =>{
     globalProps.setDefaultString("");
 
     let tempLines = [...globalProps.lines]
-    tempLines.push(globalProps.terminalInput)
+    tempLines.push({content:globalProps.terminalInput,userInput:false})
 
     if(!globalProps.credentials.loggedIn){
-        tempLines.push("Welcome to User Login Portal");
-        tempLines.push("Connecting to server ...")
-        tempLines.push("Please Enter Username:")
+        tempLines.push({content:"Welcome to User Login Portal",userInput:false});
+        tempLines.push({content:"Connecting to server ...",userInput:false})
+        tempLines.push({content:"Please Enter Username:",userInput:false})
         globalProps.setLines(tempLines);
         globalProps.setTerminalInput("");
     }
     else{
-        tempLines.push("*ERROR* already logged in as " + globalProps.credentials.username);
-        tempLines.push("Exiting...");
+        tempLines.push({content:"*ERROR* already logged in as " + globalProps.credentials.username,userInput:false});
+        tempLines.push({content:"Exiting...",userInput:false});
         globalProps.setLines(tempLines);
         defaultTrigger();
     }

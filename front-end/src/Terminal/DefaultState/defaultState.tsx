@@ -2,6 +2,8 @@ import React, {FormEvent }  from 'react'
 import {validTerminalInput} from '../validTerminalInput/validTerminalInput';
 import {loginTrigger} from '../LoginState/LoginState'
 import {logoutTrigger} from '../LogoutState/LogoutState'
+import {registerTrigger} from '../RegisterState/RegisterState'
+
 import {stateInterface} from '../stateInterface/stateInterface'
 
 let globalProps:stateInterface;
@@ -28,7 +30,7 @@ export const defaultSubmit = (e:FormEvent) =>{
     globalProps.setTerminalInput(globalProps.defaultString);
     
     let tempLines = [...globalProps.lines]
-    tempLines.push(newLine);
+    tempLines.push({content:newLine,userInput:true});
     globalProps.setLines(tempLines);
     
     newLine = newLine.substr(globalProps.defaultString.length);
@@ -52,10 +54,10 @@ export const defaultTrigger = () =>{
 export const commands = (command:string[]) =>{
     switch(command[0]){
         case "cls":
-            globalProps.setLines([""])
+            globalProps.setLines([{content:"",userInput:true}])
         break;
         case "clear":
-            globalProps.setLines([""])
+            globalProps.setLines([{content:"",userInput:true}])
         break;
         case "user":
             switch(command[1]){
@@ -71,6 +73,7 @@ export const commands = (command:string[]) =>{
 
                 case "register":
                     console.log(command)
+                    registerTrigger();
                 break;
 
                 default :

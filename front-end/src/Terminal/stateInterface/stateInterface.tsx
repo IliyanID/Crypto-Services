@@ -2,8 +2,14 @@ export interface stateInterface {
     defaultString:string;
     setDefaultString:React.Dispatch<React.SetStateAction<string>>;
 
-    lines:string[];
-    setLines:React.Dispatch<React.SetStateAction<string[]>>;
+    lines:{
+        content: string;
+        userInput: boolean;
+    }[];
+    setLines:React.Dispatch<React.SetStateAction<{
+        content: string;
+        userInput: boolean;
+    }[]>>
 
     terminalInput:string;
     setTerminalInput:React.Dispatch<React.SetStateAction<string>>;

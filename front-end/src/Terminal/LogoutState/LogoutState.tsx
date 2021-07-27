@@ -31,12 +31,12 @@ export const logoutTrigger = () =>{
     globalProps.setDefaultString("");
 
     let tempLines = [...globalProps.lines]
-    tempLines.push(globalProps.terminalInput)
+    tempLines.push({content:globalProps.terminalInput,userInput:false})
 
     if(globalProps.credentials.loggedIn){
-        tempLines.push("Welcome to User Login Portal");
-        tempLines.push("Connecting to server ...")
-        tempLines.push("Logging User Out")
+        tempLines.push({content:"Welcome to User Login Portal",userInput:false});
+        tempLines.push({content:"Connecting to server ...",userInput:false})
+        tempLines.push({content:"Logging User Out",userInput:false})
         globalProps.setLines(tempLines);
         globalProps.setTerminalInput("");
 
@@ -48,8 +48,8 @@ export const logoutTrigger = () =>{
         defaultTrigger();
     }
     else{
-        tempLines.push("*ERROR* user is not logged in ");
-        tempLines.push("Entering Login Portal");
+        tempLines.push({content:"*ERROR* user is not logged in ",userInput:false});
+        tempLines.push({content:"Entering Login Portal",userInput:false});
         globalProps.setLines(tempLines);
         loginTrigger()
     }

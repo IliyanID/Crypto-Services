@@ -10,7 +10,7 @@ export const RegisterState = (props:stateInterface):JSX.Element =>{
         defaultString:props.defaultString,
         setTerminalInput:props.setTerminalInput
     }
-    return <form onSubmit={loginSubmit} autoComplete='off'>
+    return <form onSubmit={registerSubmit} autoComplete='off'>
                 <input 
                     id="terminalNewLine"
                     onChange={(e)=>validTerminalInput(validTerminalInputProps,e.target.value)} 
@@ -23,12 +23,12 @@ export const RegisterState = (props:stateInterface):JSX.Element =>{
 }
 const addLines = (lines:string[]) => {
     let tempLines = [...globalProps.lines]
-    lines.map((line)=>{return tempLines.push(line)});
+    lines.map((line)=>{return tempLines.push({content:line,userInput:true})});
     globalProps.setLines(tempLines);
 }
 
 let registerCreds = [false,false]
-export const loginSubmit = (e:FormEvent) =>{
+export const registerSubmit = (e:FormEvent) =>{
     let input = globalProps.terminalInput;
     e.preventDefault();
     globalProps.setTerminalInput(globalProps.defaultString);
@@ -49,27 +49,29 @@ export const loginSubmit = (e:FormEvent) =>{
         temp.password = input;
         temp.loggedIn = true;
         globalProps.setCredentials(temp)
-        addLines(["‌‌ ","Login Succesfull Welcome " + globalProps.credentials.username + "!","‌‌ "])
+        addLines(["‌‌ ","Registration Succesfull Welcome " + globalProps.credentials.username + "!","‌‌ "])
         defaultTrigger()
     }
 }
 export const registerTrigger = () =>{
-    globalProps.setTerminalStateIndex(1);
+    globalProps.setTerminalStateIndex(3);
     globalProps.setDefaultString("");
 
     let tempLines = [...globalProps.lines]
-    tempLines.push(globalProps.terminalInput)
+    tempLines.push({content:globalProps.terminalInput,userInput:false})
+
+    console.log("Entered Register State")
 
     if(!globalProps.credentials.loggedIn){
-        tempLines.push("Welcome to User Login Portal");
-        tempLines.push("Connecting to server ...")
-        tempLines.push("Please Enter Username:")
+        tempLines.push({content:"Welcome to the User Registration Portal",userInput:false});
+        tempLines.push({content:"Connecting to server ...",userInput:false})
+        tempLines.push({content:"Please Enter Username:",userInput:false})
         globalProps.setLines(tempLines);
         globalProps.setTerminalInput("");
     }
     else{
-        tempLines.push("*ERROR* already logged in as " + globalProps.credentials.username);
-        tempLines.push("Exiting...");
+        tempLines.push({content:"*ERROR* already logged in as " + globalProps.credentials.username,userInput:false});
+        tempLines.push({content:"Exiting...",userInput:false});
         globalProps.setLines(tempLines);
         defaultTrigger();
     }

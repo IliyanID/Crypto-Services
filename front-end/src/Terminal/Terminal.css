@@ -18,6 +18,14 @@
     background-color:black;
 }
 
+@keyframes typewriter {
+    from {width:0;height:0;}
+    1%{opacity:1; height:auto;}
+    to{width:calc(100%);opacity:1;height:auto;}
+    99%{white-space: nowrap;}
+    100%{white-space: normal;}
+  }
+
 .Terminal p{
     margin:0;
     padding:0;
@@ -27,7 +35,14 @@
     font-family:sans-serif;
     font-weight: bolder;
     
+    height:0;
+    overflow: hidden;
+    white-space: nowrap;
+ 
+    animation: typewriter 2s steps(50, end);
+    animation-fill-mode:forwards !important;
 }
+
 
 .terminal_wrapper{
     position:absolute;
