@@ -1,8 +1,10 @@
 import React, { useState}  from 'react'
 import {DefaultState} from './DefaultState/defaultState'
-import {LoginState} from './LoginState/LoginState'
+import {LoginState,loginTrigger} from './LoginState/LoginState'
 import {LogoutState} from './LogoutState/LogoutState'
 import {RegisterState} from './RegisterState/RegisterState'
+import injectStyle from './injectStyle'
+
 import './Terminal.css'
 
 interface Props{
@@ -27,6 +29,15 @@ const Terminal: React.FC<Props> = (props) =>{
     const [terminalInput,setTerminalInput] = useState(defaultString);
     const [terminalStateIndex,setTerminalStateIndex] = useState(0);
     
+    const keyframesStyle = `
+    @keyframes dropDown{ 
+        from {height:40px;}
+        to{height:${props.height}}     
+    }
+    `;
+    injectStyle(keyframesStyle);
+
+
     let stateProps = {
         defaultString:defaultString,
         setDefaultString:setDefaultString,
@@ -41,6 +52,7 @@ const Terminal: React.FC<Props> = (props) =>{
 
         credentials:props.credentials,
         setCredentials:props.setCredentials
+
     }
     const terminalState = [
         {
@@ -60,6 +72,9 @@ const Terminal: React.FC<Props> = (props) =>{
             formvJSX:RegisterState(stateProps)
         }
     ]
+
+
+
     let delay = 0
     return(
         <div 

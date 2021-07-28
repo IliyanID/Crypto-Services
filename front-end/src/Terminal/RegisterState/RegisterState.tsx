@@ -68,6 +68,7 @@ export const registerTrigger = () =>{
         tempLines.push({content:"Please Enter Username:",userInput:false})
         globalProps.setLines(tempLines);
         globalProps.setTerminalInput("");
+        registerTrigger()
     }
     else{
         tempLines.push({content:"*ERROR* already logged in as " + globalProps.credentials.username,userInput:false});

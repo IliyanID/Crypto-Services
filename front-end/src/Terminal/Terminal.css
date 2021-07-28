@@ -11,12 +11,15 @@
     cursor:grab;
  
 }
+
 .Terminal{
     position:relative;
     border:2px var(--terminalGreen) solid;
     border-radius:10px;
     background-color:black;
+    animation:dropDown 1s;
 }
+
 
 @keyframes typewriter {
     from {width:0;height:0;}

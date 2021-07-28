@@ -1,3 +1,39 @@
 .App{
  
 }
+.header{
+    border:solid black 2px;
+    height:60px;
+}
+.headerButtons{
+    border:solid 2px blue;
+    height:60px;
+    width:600px;
+    float:right;
+    position:relative;
+
+}
+.headerButtons > button{
+    margin:0px 0px;
+    padding:10px;
+    color:white;
+    background:black;
+    border-color:black;
+    display:inline;
+
+    position: absolute;
+    left:50%;
+    transform: translateX(-50%);
+    
+    border-radius: 5px;
+
+}
+    .headerButtons>div{
+        position: absolute;
+        margin-top:50px;
+        left:50%;
+        transform: translateX(-50%);
+    }
+    .headerButtons > button:hover{
+        cursor:pointer;
+    }
