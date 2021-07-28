@@ -1,6 +1,6 @@
 import React, { useState}  from 'react'
 import {DefaultState} from './DefaultState/defaultState'
-import {LoginState,loginTrigger} from './LoginState/LoginState'
+import {LoginState} from './LoginState/LoginState'
 import {LogoutState} from './LogoutState/LogoutState'
 import {RegisterState} from './RegisterState/RegisterState'
 import injectStyle from './injectStyle'
