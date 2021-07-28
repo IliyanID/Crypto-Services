@@ -1,12 +1,19 @@
+:root{
+    --redOrange:#ff5e57;
+}
+
 .App{
- 
+    background-color: #1e272e;
+    height:100vh;
 }
 .header{
-    border:solid black 2px;
+    border-bottom:2px solid black;
     height:60px;
+    position:relative;
+
 }
 .headerButtons{
-    border:solid 2px blue;
+
     height:60px;
     width:600px;
     float:right;
@@ -16,16 +23,21 @@
 .headerButtons > button{
     margin:0px 0px;
     padding:10px;
-    color:white;
-    background:black;
-    border-color:black;
+    color:var(--terminalGreen);
+    background:var(--black);
+    border-color:var(--terminalGreen);
     display:inline;
 
     position: absolute;
     left:50%;
-    transform: translateX(-50%);
+    top:50%;
+    transform: translate(-50%, -50%);
     
     border-radius: 5px;
+    width:300px;
+    font-size:16px;
+
+    transition:.4s;
 
 }
     .headerButtons>div{
@@ -36,4 +48,21 @@
     }
     .headerButtons > button:hover{
         cursor:pointer;
+        background-color: var(--gray);
+    }
+.welcomeMessage{
+    width:200px;
+    display:inline-block;
+    position:absolute;
+    top:50%;
+    transform: translateY(-50%);
+    margin-left:30px;
+
+    border:solid var(--terminalGreen) 2px;
+    background-color:var(--black);
+    text-align: center;
+    padding:10px;
+}
+    .welcomeMessage:hover{
+        cursor:default;
     }

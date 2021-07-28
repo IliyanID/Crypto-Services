@@ -86,7 +86,7 @@ const Terminal: React.FC<Props> = (props) =>{
                     lines.map((line,key)=>{
                         if(line.userInput){
                             delay = 0;
-                            return (<p style={{animationDelay:".5s"}} key={key}>{line.content}</p>);
+                            return (<p style={{animationDelay:"0s"}} key={key}>{line.content}</p>);
                         }
                         
                         else{

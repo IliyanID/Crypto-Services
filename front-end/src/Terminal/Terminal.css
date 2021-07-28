@@ -1,5 +1,8 @@
 :root{
-    --terminalGreen:#33FF33;
+    --terminalGreen:#0be881;
+    --lightBlue:#34e7e4;
+    --black:#1e272e;
+    --gray:#485460;
 }
 .Terminal::before{
     content: '';
@@ -16,7 +19,7 @@
     position:relative;
     border:2px var(--terminalGreen) solid;
     border-radius:10px;
-    background-color:black;
+    background-color:var(--black);
     animation:dropDown 1s;
 }
 
@@ -42,7 +45,7 @@
     overflow: hidden;
     white-space: nowrap;
  
-    animation: typewriter 2s steps(50, end);
+    animation: typewriter .5s steps(50, end);
     animation-fill-mode:forwards !important;
 }
 

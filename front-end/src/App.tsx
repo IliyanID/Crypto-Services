@@ -22,8 +22,11 @@ const App = () => {
       </header>
       <div>
         <div className='header'>
+          <div style={{color:(credentials.loggedIn)?"var(--terminalGreen":"var(--redOrange"}} className='welcomeMessage'>
+            {(credentials.loggedIn)?'Logged In as ' + credentials.username:'User Not Logged In'}
+          </div>
           <div className='headerButtons'>
-            <button onClick={()=>{setCurrentTerminal(!currentTerminal);}}>Trigger Terminal</button>
+            <button onClick={()=>{setCurrentTerminal(!currentTerminal);}}>{(currentTerminal)?"Hide":"Show"} Terminal</button>
             {(currentTerminal)?temp:<div></div>}
           </div>
         </div>
